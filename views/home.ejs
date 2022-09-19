@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./template/head.ejs') %> 
+  </head>
+
+  <body>
+
+    <br /><br /><br />
+
+    <!-- table password -->
+    <details>
+      <summary>Show password</summary>
+
+      <br />
+      <div>
+        
+        <!-- table navigation -->
+        <div style="display: flex; flex-direction: row-reverse; width: 90%; justify-content: space-around;">
+
+          <form action="/backup" method="post">
+             <button class="btn btn-danger" type="submit">Back UP</button>
+          </form>
+
+
+         <nav class="navbar navbar-light bg-light" style="padding: 0;">
+          <form class="form-inline">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+          </nav>
+
+        </div>
+        
+        <br /><br /><br />
+
+        <table id="keywords" cellspacing="0" cellpadding="0">
+          <thead>
+            <tr>
+              <th><span>Time</span></th>
+              <th><span>Name</span></th>
+              <th><span>Site</span></th>
+              <th><span>Email</span></th>
+              <th><span>Password</span></th>
+              <th><span>Action</span></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% const datas = data.reverse() %> <% datas.forEach(data => { %> 
+              
+
+            <tr style="border-bottom: 1px solid #ddd">
+
+              <td onclick="hello('test')"> <% if (data.last_edited) { %>⭕<% } %> <%= data.create_time %></td>
+
+              <% let user_name = data.user_name.substr(0,10) %>
+              <td><%= user_name %></td>
+
+              <% let site = data.site.substr(0,10) %>
+              <td><a href="https://<%= data.site %>" target="_blank"><%= site %>...</a></td>
+
+              <td>
+                <input
+                  type="text"
+                  value="<%= data.email %>"
+                  class="out_data"
+                  readonly
+                />
+              </td>
+
+              <td>
+                <input
+                  type="text"
+                  value="<%= data.password %>"
+                  class="out_data"
+                  readonly
+                />
+              </td>
+
+              <td>
+                <a href="/actions?action=form_edit&id=<%= data.id %>">Edit</a> |
+                <a href="/actions?action=delete&id=<%= data.id %>">Del</a>
+              </td>
+
+            </tr>
+
+        
+            
+          <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <br>
+
+    <center>
+      <div style="width: 50%; padding-top: 50px">
+        <form action="/new" method="post">
+          <!-- name -->
+          <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                name="user_name"
+                id="name"
+                class="form-control"
+                placeholder="name"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- email -->
+          <div class="form-group row">
+            <label for="email" class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                placeholder="email"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- site -->
+          <div class="form-group row">
+            <label for="site" class="col-sm-2 col-form-label">Website</label>
+            <div class="col-sm-10">
+              <input
+                type="text"
+                name="site"
+                id="site"
+                class="form-control"
+                placeholder="site"
+              />
+            </div>
+          </div>
+
+          <!-- password -->
+          <div class="form-group row">
+            <label for="password" class="col-sm-2 col-form-label"
+              >Password</label
+            >
+            <div class="col-sm-10" style="display: flex">
+              <input
+                type="text"
+                name="password"
+                id="password"
+                class="form-control"
+                placeholder="password"
+              />
+              <button id="generate" type="button" class="btn btn-info">
+                Rand
+              </button>
+            </div>
+          </div>
+
+          <!-- notes -->
+          <div class="form-group row">
+            <label for="note" class="col-sm-2 col-form-label">Notes</label>
+            <div class="col-sm-10">
+              <textarea name="notes" id="note" style="width: 100%;" rows="5"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Add data</button>
+        </form>
+      </div>
+    </center>
+
+    <br><br><br><br><br><br><br>
+
+    <footer>
+      <div>
+      <center>
+        <p>Folder path : <%= path %> </p> 
+        <p>ip address : <%= ip %></p> 
+      </center> 
+      </div>
+    </footer>
+
+
+    <script src="js/random_password.js"></script>
+  </body>
+</html>
