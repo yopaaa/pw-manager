@@ -2,8 +2,8 @@ import dataMethod from './dataMethod.js';
 import fs from 'fs';
 
 
-function readFileData(callback = function(){}) {
-    fs.readFile('./data/password.json','utf-8',(err, result) => {
+function readFileData(callback = function(){}, path = './data/password.json') {
+    fs.readFile(path,'utf-8',(err, result) => {
        if(err) throw err;
        const datas = JSON.parse(result);
        const data = new dataMethod(datas);

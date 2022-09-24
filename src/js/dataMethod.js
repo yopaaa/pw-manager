@@ -1,6 +1,6 @@
 import fs from 'fs';
 import _ from 'lodash';
-import {myFunction} from './function/myFunction.js';
+import {myFunction} from './myFunction.js';
 import moment from 'moment';
 import { nanoid } from 'nanoid';
 
@@ -63,7 +63,8 @@ class dataMethod{
     get read(){
         return this.data
     }
-  }
+
+}
 
 
 

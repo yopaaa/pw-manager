@@ -16,13 +16,24 @@
       <div>
         
         <!-- table navigation -->
-        <div style="display: flex; flex-direction: row-reverse; width: 90%; justify-content: space-around;">
+        <div style="display: flex; flex-direction: row-reverse;justify-content: space-around; overflow-x: hidden;">
 
-          <form action="/backup" method="post">
-             <button class="btn btn-danger" type="submit">Back UP</button>
-          </form>
+          
+          <div style="display: flex; gap: 30px;">
+            <!-- BACKUP -->
+            <form action="/backup" method="post" >
+              <button download class="btn btn-primary" type="submit">Back UP</button>
+           </form>
 
+           <!-- RESTORE -->
+           <form action="/upload/restore" method="post" encType="multipart/form-data">
+            <input type="file" name="restore" id="restore" onchange="form.submit()" style="z-index:-100; opacity: 0; position: absolute;">
+            <label for="restore" class="btn btn-primary" >Restore</label>
+           </form>
 
+          </div>
+          
+           <!-- SEARCH -->
          <nav class="navbar navbar-light bg-light" style="padding: 0;">
           <form class="form-inline">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -96,7 +107,7 @@
     <br>
 
     <center>
-      <div style="width: 50%; padding-top: 50px">
+      <div class="formmm">
         <form action="/new" method="post">
           <!-- name -->
           <div class="form-group row">
@@ -174,6 +185,7 @@
       </div>
     </center>
 
+    
     <br><br><br><br><br><br><br>
 
     <footer>

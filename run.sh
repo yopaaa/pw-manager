@@ -1,1 +1,1 @@
-# pm2 start app.js && node test.js
+# npm instal
