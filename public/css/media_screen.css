@@ -1,9 +1,0 @@
-.formmm{
-    width: 50%;
-    padding-top: 50px
-  }
-  @media screen and (max-width: 800px) {
-    .formmm{
-    width: 90%;
-  }
- }
