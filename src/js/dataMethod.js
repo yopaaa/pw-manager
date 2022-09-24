@@ -20,7 +20,10 @@ class dataMethod{
       Objkey.forEach( (Objkey) => {
         newData[Objkey] = obj[Objkey]
       });
-      newData.create_time = moment().format('MMM Do YY')
+      
+      if (!newData.create_time) {
+        newData.create_time = moment().format('MMM Do YY') 
+      }
       newData.status = 'available'
 
  
