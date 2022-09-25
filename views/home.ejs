@@ -21,14 +21,14 @@
           
           <div style="display: flex; gap: 30px;">
             <!-- BACKUP -->
-            <form action="/backup" method="post" >
+            <form action="/Actions/backup" method="post" >
               <button download class="btn btn-danger" type="submit">Back UP</button>
            </form>
 
            <!-- RESTORE -->
-           <form action="/upload/restore" method="post" encType="multipart/form-data">
+           <form action="/Actions/restore" method="post" encType="multipart/form-data">
             <input type="file" name="restore" id="restore" onchange="form.submit()" style="z-index:-100; opacity: 0; position: absolute;">
-            <label for="restore" class="btn btn-primary" >Restore</label>
+            <label for="restore" class="btn btn-primary" style="cursor:pointer;" >Restore</label>
            </form>
 
           </div>
@@ -63,7 +63,10 @@
 
             <tr style="border-bottom: 1px solid #ddd">
 
-              <td onclick="hello('test')"> <% if (data.last_edited) { %>⭕<% } %> <%= data.create_time %></td>
+              <td onclick="hello('test')"> 
+                <span style="color:red;"><% if (data.last_edited) { %>$<% } %> </span>
+                <span><%= data.create_time %></span>
+              </td>
 
               <% let user_name = data.user_name.substr(0,10) %>
               <td><%= user_name %></td>
@@ -90,8 +93,8 @@
               </td>
 
               <td>
-                <a href="/actions?action=form_edit&id=<%= data.id %>">Edit</a> |
-                <a href="/actions?action=delete&id=<%= data.id %>">Del</a>
+                <a href="/actions/actions?action=form_edit&id=<%= data.id %>">Edit</a> |
+                <a href="/Actions/actions?action=delete&id=<%= data.id %>">Del</a>
               </td>
 
             </tr>
@@ -106,9 +109,10 @@
 
     <br>
 
+    <!-- FORM  -->
     <center>
       <div class="formmm">
-        <form action="/new" method="post">
+        <form action="/actions/new" method="post">
           <!-- name -->
           <div class="form-group row">
             <label for="name" class="col-sm-2 col-form-label">Name</label>
