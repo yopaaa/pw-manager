@@ -5,5 +5,9 @@
   @media screen and (max-width: 800px) {
     .formmm{
     width: 90%;
-  }
+    }
+
+    .search{
+      display: none;
+    }
  }

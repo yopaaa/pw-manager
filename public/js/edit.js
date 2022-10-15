@@ -7,7 +7,8 @@ for (const [key, value] of urlParams) {
 }
 
 
-const path = `http://0.0.0.0:40100/api/find/${search.id}`
+const path = `${location.origin}/api/find/${search.id}`
+
 
 const name = document.querySelector('#name')
 const email = document.querySelector('#email')
@@ -15,7 +16,6 @@ const site = document.querySelector('#site')
 const password = document.querySelector('#password')
 const notes = document.querySelector('#note')
 const id = document.querySelector('#id')
-
 
 
 

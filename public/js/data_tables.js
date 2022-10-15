@@ -41,7 +41,7 @@ const tableTemplate = (data) => {
 
 const htmlTable = document.querySelector(".data-table");
 
-fetchApi("http://0.0.0.0:40100/api", (datas) => {
+fetchApi(`${location.origin}/api`, (datas) => {
   let data = datas.reverse()
   let dataTable = "";
 

@@ -18,6 +18,8 @@ import login from './routes/login/login.js';
 
 const app = express();
 const __dirname = process.env.PWD;
+const host = process.env.MAIN_HOST
+const port = process.env.MAIN_PORT
 
 
 app.set('view engine', 'ejs')
@@ -47,6 +49,6 @@ app.use('/',(req,res)=>{
 })
 
 
-app.listen(process.env.MAIN_PORT,process.env.MAIN_HOST,()=>{
+app.listen(port,host,()=>{
   LogASCIIText('RILL CUY')
 })
