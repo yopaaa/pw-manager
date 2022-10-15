@@ -1,7 +1,16 @@
 # pw-manager
 
 
-.env file
-<h4>MAIN_PORT=3000</h4>
-<h4>MAIN_HOST='0.0.0.0'</h4>
+# crete .env file
+
+> crate envirotment file with
+```
+MAIN_PORT=40100
+MAIN_HOST='0.0.0.0'
+
+USER_NAME='yopa@gmail.com'
+AUTH_PASS='qwertyuiop...'
+```
+
+
 

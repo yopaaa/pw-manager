@@ -9,10 +9,16 @@
     "restart": "nodemon app.js",
     "server": "pm2 start app.js"
   },
+  "nodemonConfig": {
+    "ignore": ["data/*"]
+  },
   "keywords": [],
-  "author": "",
+  "author": "Yopa pitra ramadhani",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.20.1",
+    "chalk": "^5.1.2",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.1",
     "ejs": "^3.1.8",
     "express": "^4.18.1",

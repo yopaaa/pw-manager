@@ -1,8 +1,18 @@
+// MODULE IMPORT
 import express from 'express';
 import 'dotenv/config';
+import cookieParser from 'cookie-parser';
+
+
+//FUNCTION IMPORT
 import LogASCIIText from './src/js/ASCIIArt.js'
-import readFileData from './src/js/readFileData.js';
+import authentication from './routes/login/authentication.js';
+
+// ROUTE IMPORT
 import Actions from './routes/Actions/Actions.js';
+import Api from './routes/Api/api.js';
+import login from './routes/login/login.js';
+
 
 
 
@@ -12,19 +22,21 @@ const __dirname = process.env.PWD;
 
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(__dirname + "/public"));
-app.use('/actions',Actions)
+app.use(cookieParser())
+
+app.use(express.static(__dirname + "/public"))
+
+app.use('/actions',authentication,Actions)
+app.use('/api',authentication,Api)
+app.use('/login',login)
 
 
-app.get('/', (req,res) => {
-    readFileData((data)=>{
-        
-      res.render('home',{
-        page_title: 'Password_manager',
-        data: data.read,
-        path: __dirname,
-        ip: req.ip,
-      })
+
+app.get('/',authentication,(req,res) => {
+    res.render('home',{
+      page_title: 'Password_manager',
+      path: __dirname,
+      ip: req.ip,
     })
 })
 

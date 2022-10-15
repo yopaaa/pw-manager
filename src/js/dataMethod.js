@@ -1,14 +1,12 @@
-import fs from 'fs';
 import _ from 'lodash';
-import {myFunction} from './myFunction.js';
 import moment from 'moment';
 import { nanoid } from 'nanoid';
+import chalk from 'chalk';
 
 
 class dataMethod{
     constructor(data){
        this.data = data
-       this.delData = JSON.parse( fs.readFileSync('./data/delete.json'))
     }
 
     // CREATE
@@ -45,21 +43,27 @@ class dataMethod{
     // FIND
     find(id){
        const  q = this.data.findIndex(arr => arr.id === id )
-       return this.data[q]
+       const result = this.data[q]
+       if (result) {
+        return this.data[q]
+       } else {
+        return {
+          message:'someting wrong i can fell it',
+          code:404
+        }
+       }
     }
 
     // DELETE
     delete(id){
         const  q = this.data.findIndex(arr => arr.id === id )
         const delData = this.data[q];
-        delData['status'] = 'not available'
-        delData['delete'] = moment().format('MMM Do YY')
-        
-        this.delData.push(delData)
+        console.log(chalk.red('DELETE'));
+        console.log(delData);
+
         _.remove(this.data , (arr)=>{
           return arr.id === id;
           })
-        myFunction.addNewData('./data/delete.json',this.delData)
     }
 
     // READ

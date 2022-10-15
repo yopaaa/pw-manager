@@ -13,10 +13,3 @@ generate.addEventListener('click', () => {
           
 });
 
-
-function hello(text) {
-    // const div_details = document.getElementById("details");
-    // div_details.innerHTML = text
-    alert(text)
-}
-      

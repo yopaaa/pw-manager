@@ -14,21 +14,9 @@ const myFunction = {
         });
     },
 
-    backup: function(Namefile) {
-        const fileName = moment().format("Do-MMM-YY");
-
-        readFileData((data) => {
-            const dataJSON = JSON.stringify(data.read, null, '     ');
-            fs.writeFile(`./data/backup/${fileName}.json`,dataJSON,err=>{
-                if(err)throw err 
-                Namefile(fileName)
-            })
-        })
-    },
-
     delFile: function(path){
          fs.unlink(path,(err)=>{
-           
+           if (err) throw err
          })
     },
 
