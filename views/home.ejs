@@ -45,13 +45,8 @@
         </div>
 
         <!-- SEARCH -->
-        <nav class="navbar navbar-light bg-light search" style="padding: 0">
-          <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-              Search
-            </button>
-          </form>
+        <nav style="padding: 0; display: flex;">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="searchBar"/>
         </nav>
       </div>
 
@@ -78,7 +73,6 @@
   </details>
 
   <br />
-
   <!-- FORM  -->
   <center>
     <div class="formmm">
@@ -132,7 +126,6 @@
   </center>
 
   <br /><br /><br /><br /><br /><br /><br />
-
   <footer>
     <div>
       <center>
@@ -143,8 +136,20 @@
       </center>
     </div>
   </footer>
+  <script>
+    function tooglePass(params) {
+      let element = document.getElementById(params)
+      if (element.type == 'password') {
+        element.type = 'text'
+      } else {
+        element.type = 'password'
+      }
+    }
+
+  </script>
 
   <script src="js/data_tables.js"></script>
+  <script src="js/searchBar.js"></script>
   <script src="js/random_password.js"></script>
 </body>
 

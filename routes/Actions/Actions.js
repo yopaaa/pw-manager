@@ -24,17 +24,18 @@ Actions.post("/restore", function (req, res) {
 
     // CHECK APAKAH FILE TERSEBUT JSON ATAU BUKAN
     if (File.mimetype !== "application/json") {
+      console.log(File.mimetype);
       res.redirect("/file_incorect"); //JIKA BUKAN MAKA TIDAK AKAN DI PROSES
     } else { //JIKA FILE YANG DI MASUKAN BENAR MAKA
       File.mv(uploadPath, (err) => {
         if (err) res.status(500).send(err);
 
         readFileData((data) => {
-          const DataRestore = JSON.parse(
-            fs.readFileSync(`./data/${fileName}`)
-          );
-
           try {
+             const DataRestore = JSON.parse(
+               fs.readFileSync(`./data/${fileName}`)
+             );
+
             DataRestore.forEach((element) => {
               let checkData = data.find(element.id);
 
@@ -43,14 +44,17 @@ Actions.post("/restore", function (req, res) {
                 data.create(element);
               }
             });
-          } catch (err) {
-            myFunction.delFile(`./data/${fileName}`);
+          } catch (error) {
+            console.log('Someting wrong with this file');
+            if (fs.existsSync(`./data/${fileName}`)) {
+              myFunction.delFile(`./data/${fileName}`);
+             }
           } finally {
-            myFunction.delFile(`./data/${fileName}`);
+             if (fs.existsSync(`./data/${fileName}`)) {
+              myFunction.delFile(`./data/${fileName}`);
+             }
+            myFunction.addNewData("./data/password.json", data.read);
           }
-
-          // console.log(data.read);
-          myFunction.addNewData("./data/password.json", data.read);
         });
 
         res.redirect("/");
@@ -61,40 +65,40 @@ Actions.post("/restore", function (req, res) {
 
 // BACKUP ROUTE
 Actions.post("/backup", (req, res) => {
-    res.download(
-      `./data/password.json`,
-      `My_password_${Date.now()}.json`,
-      (err) => {
-        if (err) {
-          throw err
-          res.redirect("/404")
-       };
-      }
-    );
+  res.download(
+    `./data/password.json`,
+    `My_password_${Date.now()}.json`,
+    (err) => {
+      if (err) {
+        throw err
+        res.redirect("/404")
+      };
+    }
+  );
 });
 
 // EDIT DATA ROUTE
 Actions.get("/edit", (req, res) => {
-    // /action/edit?id=12345
-    res.render("edit", {
-      page_title: "edit",
-    });
+  // /action/edit?id=12345
+  res.render("edit", {
+    page_title: "edit",
+  });
 });
 
 // DELETE DATA ROUTE
 Actions.get("/delete", (req, res) => {
-    // /action/delete?id=12345
-    readFileData((data) => {
-      const getActionID = data.find(req.query.id);
+  // /action/delete?id=12345
+  readFileData((data) => {
+    const getActionID = data.find(req.query.id);
 
-      if (getActionID.code) {
-        res.redirect('/id_not_found')
-      }else{
-        data.delete(getActionID.id);
-        myFunction.addNewData("./data/password.json", data.read);
-        res.redirect("/");
-      }
-    });
+    if (getActionID.code) {
+      res.redirect('/id_not_found')
+    } else {
+      data.delete(getActionID.id);
+      myFunction.addNewData("./data/password.json", data.read);
+      res.redirect("/");
+    }
+  });
 });
 
 // NEW DATA ROUTE

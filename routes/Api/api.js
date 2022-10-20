@@ -31,6 +31,27 @@ Api.get('/find/:id',(req,res)=>{
   })
 })
 
+Api.get('/search',(req,res)=>{
+  const result = []
+  let query 
+  if (req.query.q) {
+    query = req.query.q.toLowerCase()
+  }
+
+  readFileData((data)=>{
+    data.read.forEach(element => {
+      if (element.key.includes(query)) {
+        result.push(element)
+      }
+    });
+    res.send({
+      data: result,
+      path: __dirname,
+      ip: req.ip,
+    })
+  })
+})
+
 Api.use((req,res)=>{
     res.status(404)
     res.send({

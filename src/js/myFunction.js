@@ -16,7 +16,7 @@ const myFunction = {
 
     delFile: function(path){
          fs.unlink(path,(err)=>{
-           if (err) throw err
+           if (err) console.log(err)
          })
     },
 
