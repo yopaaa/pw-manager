@@ -21,7 +21,7 @@ class dataMethod{
       });
 
       
-      if (!newData.create_time) {
+      if (!newData.create_time || newData.create_time == number) {
         newData.create_time = Date.now()
       }
       if (!newData.key) {

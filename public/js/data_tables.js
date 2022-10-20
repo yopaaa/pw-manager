@@ -28,7 +28,7 @@ const tableTemplate = (data) => {
                   <input type="text" value="${email}" class="out_data" readonly />
                 </td>
   
-                <td>
+                <td style="display:flex; gap:5px;">
                   <input type="password" id="password${id}" value="${password}" class="out_data" readonly
                   />
                   <input type="checkbox" name="" id="" onclick="tooglePass('password${id}')">
