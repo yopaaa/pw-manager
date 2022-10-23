@@ -1,13 +1,11 @@
 .formmm{
-    width: 50%;
+    width: 95%;
     padding-top: 50px
   }
   @media screen and (max-width: 800px) {
-    .formmm{
-    width: 90%;
-    }
 
     .search{
       display: none;
     }
  }
+ 

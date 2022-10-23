@@ -1,6 +1,6 @@
-const password = document.getElementById("password");
+const password = document.querySelector("#password");
 let string = "Aaba;BCDEFGHIJKLMNOPQRSTUVWXYZacdefghijklnopqrstuvwxyz0123456789@#$%^&*!()-_=+[{}]|\;:<,>.?/";
-const generate = document.getElementById("generate");
+const generate = document.querySelector(".generate_button");
       
 generate.addEventListener('click', () => {
           let pass = "";
@@ -13,3 +13,12 @@ generate.addEventListener('click', () => {
           
 });
 
+// HIDE OR SHOW PASSWORD
+function tooglePass(params) {
+    let element = document.getElementById(params)
+    if (element.type == 'password') {
+      element.type = 'text'
+    } else {
+      element.type = 'password'
+    }
+  }

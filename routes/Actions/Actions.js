@@ -77,19 +77,10 @@ Actions.post("/backup", (req, res) => {
   );
 });
 
-// EDIT DATA ROUTE
-Actions.get("/edit", (req, res) => {
-  // /action/edit?id=12345
-  res.render("edit", {
-    page_title: "edit",
-  });
-});
-
 // DELETE DATA ROUTE
-Actions.get("/delete", (req, res) => {
-  // /action/delete?id=12345
+Actions.post("/delete", (req, res) => {
   readFileData((data) => {
-    const getActionID = data.find(req.query.id);
+    const getActionID = data.find(req.body.id);
 
     if (getActionID.code) {
       res.redirect('/id_not_found')
@@ -116,9 +107,11 @@ Actions.post("/change_data", (req, res) => {
     const userID = req.body.id;
     const edited_data = req.body;
 
-    data.update(userID, edited_data);
-
-    myFunction.addNewData("./data/password.json", data.read);
+    if (userID) {
+     data.update(userID, edited_data);
+     myFunction.addNewData("./data/password.json", data.read); 
+    }
+    
     res.redirect("/");
   });
 });

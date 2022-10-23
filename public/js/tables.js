@@ -1,4 +1,3 @@
-
 const tableTemplate = (data) => {
   let { create_time, email, id, password, site, user_name, last_edited } = data;
 
@@ -35,14 +34,20 @@ const tableTemplate = (data) => {
                 </td>
   
                 <td>
-                  <a href="/actions/edit?id=${id}">Edit</a> |
-                  <a href="/Actions/delete?id=${id}" onclick="confirm('you want to delete this')">Del</a>
+                     <a href="javascript:void(0)" class="tbActionsedit" data-id="${id}" 
+                        data-bs-toggle="modal" data-bs-target="#formNewData" 
+                        data-path="/actions/change_data" data-action="change_data">edit</a> |
+
+                        <a href="javascript:void(0)" class="modal2" data-id="${id}" 
+                        data-bs-toggle="modal" data-bs-target="#modal2"
+                        data-path="/actions/delete" data-action="delete">Del</a>                   
                 </td>
   
               </tr>`;
 };
 
-function displayCharacters(datas = {} , destination) {
+// MAPPING DATA ARRAY
+function displayCharacters(datas = {}, destination) {
   let data = datas.reverse()
 
   let dataTable = data.map(objectData => {
@@ -53,10 +58,23 @@ function displayCharacters(datas = {} , destination) {
 }
 
 const htmlTable = document.querySelector(".data-table");
+const searchBar = document.getElementById('searchBar')
+
 let resultDataApi
 
-fetchApi(`${location.origin}/api`,datas => {
+// DISPLAY ALL DATA
+fetchApi(`${location.origin}/api`, datas => {
   resultDataApi = datas
-  displayCharacters(resultDataApi,htmlTable)
+  displayCharacters(resultDataApi, htmlTable)
 });
+
+// SHOW RESULT SEARCH DATA
+searchBar.addEventListener('keyup', (e) => {
+  const query = e.target.value.toLowerCase()
+  const resultSearch = resultDataApi.filter(datas => {
+    return datas.key.includes(query)
+  })
+
+  displayCharacters(resultSearch, htmlTable)
+})
 

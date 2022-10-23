@@ -15,22 +15,18 @@ class dataMethod{
       const {user_name,email,site,notes} = obj
       const Objkey = Object.keys(obj)
 
-      newData.id = nanoid(20)
+      
       Objkey.forEach( (Objkey) => {
         newData[Objkey] = obj[Objkey]
       });
 
-      
-      if (!newData.create_time || newData.create_time == number) {
-        newData.create_time = Date.now()
-      }
+      newData.id = nanoid(20)
+      newData.create_time = Date.now()
       if (!newData.key) {
         let kunci = `${user_name} ${email} ${site} ${notes}`
         newData.key = kunci.toLowerCase()
       }
-
       
-
       this.data.push(newData)
     }
 
