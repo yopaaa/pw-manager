@@ -39,7 +39,7 @@ const tableTemplate = (data) => {
                         data-path="/actions/change_data" data-action="change_data">edit</a> |
 
                         <a href="javascript:void(0)" class="modal2" data-id="${id}" 
-                        data-bs-toggle="modal" data-bs-target="#modal2"
+                        data-bs-toggle="modal" data-bs-target="#formModal2"
                         data-path="/actions/delete" data-action="delete">Del</a>                   
                 </td>
   

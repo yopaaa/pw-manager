@@ -31,7 +31,6 @@ $(document).ready(function () {
         form.action = $(this).data('path')
 
         if (action == 'new') {
-            console.log('new');
             reset_form()
             titleform.innerHTML = 'Add new data'
             sendform.innerHTML = 'Add data'
@@ -48,19 +47,39 @@ $(document).ready(function () {
         }
     });
 
-    
-    $('#tbActions').on('click', '.modal2', function () {
+
+    $('#main-details-tb').on('click', '.modal2', function () {
         let id = $(this).data('id');
         let tbActionsResult = resultDataApi.find(element => element.id == id);
 
         let form2 = document.querySelector("#form_modal2")
         let formbody = document.querySelector("#modal2-body")
+        let formTitle = document.querySelector("#modal2Title")
+        let modal2SubmitBtn = document.querySelector("#modal2Submit")
         let action = $(this).data('action')
 
         form2.action = $(this).data('path')
         if (action == 'delete') {
+            formTitle.innerHTML = "Delete"
             formbody.innerHTML = `do you want to delete <i style="color:blue;">${tbActionsResult.user_name}</i> ?`
             formbody.innerHTML += `<input type="hidden" name="id" value="${id}">`
+            modal2SubmitBtn.innerHTML = "Delete"
+        }
+        if (action == 'backup') {
+            formTitle.innerHTML = "Back UP"
+            formbody.innerHTML = `
+          <div class="form-group">
+            <label for="text" class="">File name</label>
+            <div style="width: 80%;">
+             <input type="text" name="fileName" id="fileName" class="form-control" placeholder="Name" required autocomplete="off"/>
+            </div>
+          </div>`
+         modal2SubmitBtn.innerHTML = "BackUP"
+        }
+        if (action == 'restore') {
+            formTitle.innerHTML = "Restore"
+            formbody.innerHTML = `<input type="file" name="restore" id="restore"/>`
+            modal2SubmitBtn.innerHTML = "Restore"
         }
     });
 

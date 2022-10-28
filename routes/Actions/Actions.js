@@ -16,6 +16,7 @@ Actions.use(fileUpload());
 Actions.post("/restore", function (req, res) {
   if (req.files === undefined || req.files.restore === undefined) {
     res.redirect("/");
+    console.log('no file restore');
   } else {
 
     const File = req.files.restore;
@@ -24,7 +25,7 @@ Actions.post("/restore", function (req, res) {
 
     // CHECK APAKAH FILE TERSEBUT JSON ATAU BUKAN
     if (File.mimetype !== "application/json") {
-      console.log(File.mimetype);
+      console.log("file type incorrect : "+File.mimetype);
       res.redirect("/file_incorect"); //JIKA BUKAN MAKA TIDAK AKAN DI PROSES
     } else { //JIKA FILE YANG DI MASUKAN BENAR MAKA
       File.mv(uploadPath, (err) => {
@@ -65,9 +66,11 @@ Actions.post("/restore", function (req, res) {
 
 // BACKUP ROUTE
 Actions.post("/backup", (req, res) => {
+  const fileName = req.body.fileName
+  console.log(fileName);
   res.download(
     `./data/password.json`,
-    `My_password_${Date.now()}.json`,
+    `${fileName}.json`,
     (err) => {
       if (err) {
         throw err
@@ -101,7 +104,7 @@ Actions.post("/new", (req, res) => {
   });
 });
 
-// CHANGE DATA ROUTE
+// UPDATE DATA ROUTE
 Actions.post("/change_data", (req, res) => {
   readFileData((data) => {
     const userID = req.body.id;

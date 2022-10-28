@@ -13,7 +13,7 @@
     <summary>Show password</summary>
 
     <br />
-    <div>
+    <div id="main-details-tb">
       <!-- table navigation -->
       <div style="display: flex;flex-direction: row-reverse;justify-content: space-around;overflow-x: hidden;">
 
@@ -24,18 +24,20 @@
 
 
           <!-- BACKUP -->
-          <form action="/Actions/backup" method="post">
-            <button download class="btn btn-info" type="submit">
-              Back UP
-            </button>
-          </form>
+          <span  class="btn btn-info modal2" href="javascript:void(0)" data-id="${id}" 
+                data-bs-toggle="modal" data-bs-target="#formModal2"
+               data-path="/Actions/backup" data-action="backup" style="height:min-content;">
+           Back UP
+          </span>
+          
 
           <!-- RESTORE -->
-          <form action="/Actions/restore" method="post" encType="multipart/form-data">
-            <input type="file" name="restore" id="restore" onchange="form.submit()"
-              style="z-index: -100; opacity: 0; position: absolute" />
-            <label for="restore" class="btn btn-primary" style="cursor: pointer">Restore</label>
-          </form>
+          <span  class="btn btn-primary modal2" href="javascript:void(0)" data-id="${id}" 
+                data-bs-toggle="modal" data-bs-target="#formModal2"
+               data-path="/Actions/restore" data-action="restore" style="height:min-content;">
+            Restore
+          </span>
+
         </div>
 
         <!-- SEARCH -->
@@ -78,7 +80,6 @@
         <!-- TITLE -->
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
         </div>
 
         <form method="post" id="form">
@@ -91,7 +92,7 @@
                 <div class="form-group row">
                   <label for="name" class="col-sm-2 col-form-label">Name</label>
                   <div class="col-sm-10">
-                    <input type="text" name="user_name" id="name" class="form-control" placeholder="name" required />
+                    <input type="text" name="user_name" id="name" class="form-control" placeholder="name" required autocomplete="off"/>
                   </div>
                 </div>
 
@@ -99,7 +100,7 @@
                 <div class="form-group row">
                   <label for="email" class="col-sm-2 col-form-label">Email</label>
                   <div class="col-sm-10">
-                    <input type="email" name="email" id="email" class="form-control" placeholder="email" required />
+                    <input type="email" name="email" id="email" class="form-control" placeholder="email" required autocomplete="off"/>
                   </div>
                 </div>
 
@@ -107,7 +108,7 @@
                 <div class="form-group row">
                   <label for="site" class="col-sm-2 col-form-label">Website</label>
                   <div class="col-sm-10">
-                    <input type="text" name="site" id="site" class="form-control" placeholder="site" />
+                    <input type="text" name="site" id="site" class="form-control" placeholder="site" autocomplete="off"/>
                   </div>
                 </div>
 
@@ -115,7 +116,7 @@
                 <div class="form-group row">
                   <label for="password" class="col-sm-2 col-form-label">Password</label>
                   <div class="col-sm-10" style="display: flex">
-                    <input type="text" name="password" id="password" class="form-control" placeholder="password" />
+                    <input type="text" name="password" id="password" class="form-control" placeholder="password" required autocomplete="off"/>
                     <button class="generate_button" type="button" class="btn btn-info">
                       Rand
                     </button>
@@ -150,19 +151,18 @@
 
 
   <!-- FORM DELETE BACKUP RESTORE -->
-  <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modal2" aria-hidden="true">
+  <div class="modal fade" id="formModal2" tabindex="-1" aria-labelledby="modal2" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modal2">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">x</button>
+          <h1 class="modal-title fs-5" id="modal2Title"></h1>
         </div>
-        <form action="" method="post" id="form_modal2">
+        <form action="" method="post" id="form_modal2" encType="multipart/form-data">
           <div class="modal-body" id="modal2-body">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">send</button>
+            <button type="submit" class="btn btn-primary" id="modal2Submit"></button>
           </div>
         </form>
       </div>
@@ -187,7 +187,7 @@
 
 
   <script src="js/jquery/jquery-3.3.1.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+  <script src="js/jquery/bootstrap.bundle.min.js"
     integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
     crossorigin="anonymous"></script>
   <script src="js/tables.js"></script>

@@ -23,8 +23,8 @@ class dataMethod{
       newData.id = nanoid(20)
       newData.create_time = Date.now()
       if (!newData.key) {
-        let kunci = `${user_name} ${email} ${site} ${notes}`
-        newData.key = kunci.toLowerCase()
+        let keys = `${user_name} ${email} ${site} ${notes}`
+        newData.key = keys.toLowerCase()
       }
       
       this.data.push(newData)
@@ -33,12 +33,14 @@ class dataMethod{
     // UPDATE
     update(id = String,data= Object){
       const  q = this.data.findIndex(arr => arr.id === id )
+      const keys = `${data.user_name} ${data.email} ${data.site} ${data.notes}`
       const Objkey = Object.keys(data)
 
       Objkey.forEach( (Objkey) => {
         this.data[q][Objkey] = data[Objkey]
       });
       this.data[q].last_edited = Date.now()
+      this.data[q].key = keys.toLowerCase()
 
     }
   
