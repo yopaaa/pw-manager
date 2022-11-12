@@ -48,7 +48,7 @@ const tableTemplate = (data) => {
 
 // MAPPING DATA ARRAY
 function displayCharacters(datas = {}, destination) {
-  let data = datas.reverse()
+  let data = datas
 
   let dataTable = data.map(objectData => {
     return tableTemplate(objectData);
@@ -64,7 +64,7 @@ let resultDataApi
 
 // DISPLAY ALL DATA
 fetchApi(`${location.origin}/api`, datas => {
-  resultDataApi = datas
+  resultDataApi = datas.reverse()
   displayCharacters(resultDataApi, htmlTable)
 });
 

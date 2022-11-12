@@ -7,10 +7,12 @@
   "scripts": {
     "test": "node app.js",
     "restart": "nodemon app.js",
-    "server": "pm2 start app.js"
+    "startProd": "pm2 start app.js"
   },
   "nodemonConfig": {
-    "ignore": ["data/*"]
+    "ignore": [
+      "data/*"
+    ]
   },
   "keywords": [],
   "author": "Yopa pitra ramadhani",
@@ -27,5 +29,8 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "nanoid": "^4.0.0"
+  },
+  "devDependencies": {
+    "pm2": "^5.2.2"
   }
 }
